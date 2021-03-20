@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:bliss_test/_core/error/exceptions.dart';
 import 'package:bliss_test/_core/keys.dart';
 import 'package:bliss_test/home/services/emoji_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';

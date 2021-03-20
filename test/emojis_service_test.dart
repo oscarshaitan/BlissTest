@@ -1,4 +1,4 @@
-import 'package:bliss_test/_core/error/exceptions.dart';
+import 'package:bliss_test/_core/exceptions.dart';
 import 'package:bliss_test/home/services/emoji_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_test/flutter_test.dart';

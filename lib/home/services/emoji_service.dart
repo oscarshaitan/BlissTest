@@ -1,8 +1,9 @@
-import 'package:bliss_test/_core/error/exceptions.dart';
+import 'package:bliss_test/_core/exceptions.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class EmojiServices {
-  final Client _client;
+  final http.Client _client;
 
   EmojiServices(this._client);
 

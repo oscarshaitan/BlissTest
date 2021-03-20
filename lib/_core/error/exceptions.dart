@@ -1,0 +1,1 @@
+class FailFetchEmojis implements Exception{}

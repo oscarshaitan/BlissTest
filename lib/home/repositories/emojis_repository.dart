@@ -16,18 +16,15 @@ class EmojisRepository {
 
   Future<Map<String, dynamic>> fetchEmojis() async {
     if (_emojis.isEmpty) {
+      String emojisJson = _sharedPreferences.get(Keys.emojisKey);
 
-        String emojisJson = _sharedPreferences.get(Keys.emojisKey);
+      if (emojisJson == null) {
+        String tempEmojis = await _emojiServices.fetchEmojis();
 
-        if (emojisJson == null) {
-          String tempEmojis = await _emojiServices.fetchEmojis();
-
-          return _saveEmojisFroomString(tempEmojis,
-              saveOnSharePreferences: true);
-        } else {
-          return _saveEmojisFroomString(emojisJson);
-        }
-
+        return _saveEmojisFroomString(tempEmojis, saveOnSharePreferences: true);
+      } else {
+        return _saveEmojisFroomString(emojisJson);
+      }
     } else {
       return _emojis;
     }

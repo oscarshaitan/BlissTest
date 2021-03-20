@@ -37,6 +37,9 @@ dependencies:
   #NETWORK
   http: ^0.13.1
 
+  #tests
+  mockito: ^5.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -16,7 +16,7 @@ class EmojisRepository {
 
   Future<Map<String, dynamic>> fetchEmojis() async {
     if (_emojis.isEmpty) {
-      try {
+
         String emojisJson = _sharedPreferences.get(Keys.emojisKey);
 
         if (emojisJson == null) {
@@ -27,9 +27,7 @@ class EmojisRepository {
         } else {
           return _saveEmojisFroomString(emojisJson);
         }
-      } on FailFetchEmojis catch (e) {
-        throw e;
-      }
+
     } else {
       return _emojis;
     }

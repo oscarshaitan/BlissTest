@@ -1,16 +1,15 @@
 import 'package:bliss_test/_core/models/emoji.dart';
 import 'package:flutter/material.dart';
 
-import 'loading_widget.dart';
 import 'network_image_widget.dart';
 
-class EmojiTile extends StatelessWidget {
-  final Emoji emoji;
+class ImageTile extends StatelessWidget {
+  final ImageApp image;
   final Function onTap;
 
-  const EmojiTile({
+  const ImageTile({
     Key key,
-    this.emoji,
+    this.image,
     this.onTap,
   }) : super(key: key);
 
@@ -20,7 +19,7 @@ class EmojiTile extends StatelessWidget {
       onTap: onTap ?? () {},
       child: Center(
         child: NetworkImageWidget(
-          url: emoji.url,
+          url: image?.url,
         ),
       ),
     );

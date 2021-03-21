@@ -39,6 +39,7 @@ dependencies:
 
   #UI
   cached_network_image: ^2.5.1
+  loading_overlay: ^0.3.0
 
   #tests
   mockito: ^5.0.2

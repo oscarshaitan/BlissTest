@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:bliss_test/_core/exceptions.dart';
 import 'package:bliss_test/_core/keys.dart';
-import 'package:bliss_test/home/repositories/user_repository.dart';
+import 'package:bliss_test/_core/repositories/user_repository.dart';
 import 'package:bliss_test/home/services/user_services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
@@ -50,7 +50,7 @@ void main() {
 }''';
 
   String spResponseMocked =
-      "{\"user\": \"https://avatars.githubusercontent.com/u/9093952?v=4\"}";
+      "{\"user\":\"https://avatars.githubusercontent.com/u/9093952?v=4\"}";
   MockService service;
   MockShareP shareP;
   UserRepository repositoryInitial;
@@ -72,7 +72,7 @@ void main() {
     verify(shareP.get(Keys.usersKey));
     verify(service.fetchUserAvatar('user'));
     verify(shareP.setString(Keys.usersKey,
-        "{user: https://avatars.githubusercontent.com/u/9093952?v=4}"));
+        "{\"user\":\"https://avatars.githubusercontent.com/u/9093952?v=4\"}"));
   });
 
   test('when repo initial is called and got sP saved then return from there',
@@ -93,5 +93,14 @@ void main() {
     when(shareP.get(Keys.emojisKey)).thenAnswer((_) => null);
     expect(() async => await repositoryInitial.fetchUserAvatar('user'),
         throwsA(TypeMatcher<FailFetchUserAvatar>()));
+  });
+
+  test(
+      'when repo is called to remove user avatar should remove for all storage levels',
+      () async {
+    when(shareP.get(Keys.usersKey)).thenAnswer((_) => spResponseMocked);
+    repositoryWithGetSave.removeUserAvatar('user');
+    verify(shareP.get(Keys.usersKey));
+    verify(shareP.setString(Keys.usersKey, '{}'));
   });
 }

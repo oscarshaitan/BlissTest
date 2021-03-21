@@ -1,6 +1,6 @@
-
 import 'package:bliss_test/_core/exceptions.dart';
-import 'package:bliss_test/home/repositories/user_repository.dart';
+import 'package:bliss_test/_core/models/emoji.dart';
+import 'package:bliss_test/_core/repositories/user_repository.dart';
 import 'package:bliss_test/home/use_case/fectch_user_avatar.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
@@ -18,11 +18,14 @@ void main() {
   });
 
   test('when useCase is called, then call the repo', () async {
-    when(repo.fetchUserAvatar('user')).thenAnswer((_) async => responseMocked);
+    when(repo.fetchUserAvatar('user'))
+        .thenAnswer((_) async => ImageApp(name: 'user', url: responseMocked));
     final result = await useCase('user');
     verify(repo.fetchUserAvatar('user'));
 
-    expect(result, responseMocked);
+    expect(result.name, 'user');
+    expect(result.url, responseMocked);
+    //too add equatable to compare diractly with the type
   });
 
   test('when repo throw FailFetchUserAvatar then throw same error', () async {

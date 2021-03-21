@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 
-class Emoji {
+class ImageApp {
   final String name;
   final String url;
 
-  const Emoji({
+  const ImageApp({
     @required this.name,
     @required this.url,
   });
+
+
 }

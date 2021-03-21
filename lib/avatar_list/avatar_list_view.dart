@@ -1,5 +1,6 @@
 import 'package:bliss_test/_core/models/emoji.dart';
 import 'package:bliss_test/_core/widgets/emoji_tile.dart';
+import 'package:bliss_test/_core/widgets/grid_images_widget.dart';
 import 'package:bliss_test/_core/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,21 +53,10 @@ class _AvatarListViewState extends State<AvatarListView> {
                   duration: Duration(milliseconds: 350),
                   child: state is AvatarListInitial
                       ? LoadingWidget()
-                      : GridView.builder(
-                          itemCount: state.avatars.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4,
-                                  crossAxisSpacing: 5,
-                                  mainAxisSpacing: 5,
-                                  childAspectRatio: 0.9),
-                          itemBuilder: (BuildContext context, int index) {
-                            return ImageTile(
-                              onTap: () {
-                                _cubit.removeTile(state.avatars[index]);
-                              },
-                              image: state.avatars[index],
-                            );
+                      : GridImageAppWidget(
+                          images: state.avatars,
+                          onTap: (ImageApp imageApp) {
+                            _cubit.removeTile(imageApp);
                           },
                         ),
                 ),

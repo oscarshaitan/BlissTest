@@ -1,5 +1,6 @@
 import 'package:bliss_test/_core/models/emoji.dart';
 import 'package:bliss_test/_core/widgets/emoji_tile.dart';
+import 'package:bliss_test/_core/widgets/grid_images_widget.dart';
 import 'package:bliss_test/_core/widgets/loading_widget.dart';
 import 'package:bliss_test/emoji_list/cubit/emoji_list_cubit.dart';
 import 'package:flutter/material.dart';
@@ -56,21 +57,10 @@ class _EmojiListViewState extends State<EmojiListView> {
                     duration: Duration(milliseconds: 350),
                     child: state is EmojiListInitial
                         ? LoadingWidget()
-                        : GridView.builder(
-                            itemCount: state.emojis.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 4,
-                                    crossAxisSpacing: 5,
-                                    mainAxisSpacing: 5,
-                                    childAspectRatio: 0.9),
-                            itemBuilder: (BuildContext context, int index) {
-                              return ImageTile(
-                                onTap: () {
-                                  _cubit.removeTile(state.emojis[index]);
-                                },
-                                image: state.emojis[index],
-                              );
+                        : GridImageAppWidget(
+                            images: state.emojis,
+                            onTap: (ImageApp imageApp) {
+                              _cubit.removeTile(imageApp);
                             },
                           ),
                   ),

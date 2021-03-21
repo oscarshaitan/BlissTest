@@ -65,7 +65,7 @@ class HomeCubit extends Cubit<HomeState> {
         ImageApp userAvatar = await _fetchUserAvatar(user);
         emit(HomeRenderImage(currentImage: userAvatar));
       }
-    } on FailFetchEmojis catch (_) {
+    } on FailFetchUserAvatar catch (_) {
       emit(FetchError('Something happen fetching the user avatar'));
     }
   }

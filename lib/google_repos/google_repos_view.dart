@@ -17,7 +17,7 @@ class _GoogleReposViewState extends State<GoogleReposView> {
   @override
   void initState() {
     _controller.addListener(() {
-      if (_controller.position.maxScrollExtent - _controller.offset < 100) {
+      if (_controller.position.maxScrollExtent - _controller.offset < 150) {
         _cubit.loadMoreRepos();
       }
     });

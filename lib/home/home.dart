@@ -44,13 +44,18 @@ class HomeView extends StatelessWidget {
                   child: state is FetchError
                       ? Column(
                           children: [
-                            Icon(
-                              Icons.error,
-                              color: Colors.white,
+                            Container(
+                              margin: EdgeInsets.all(32),
+                              child: Icon(
+                                Icons.error,
+                                color: Colors.white,
+                                size: 64,
+                              ),
                             ),
                             Center(
                               child: Text(
                                 state.error,
+                                textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle1

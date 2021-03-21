@@ -1,9 +1,9 @@
 import 'package:bliss_test/_core/exceptions.dart';
 import 'package:bliss_test/home/services/emoji_service.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:http/http.dart' as http;
 import 'package:matcher/matcher.dart';
+import 'package:mockito/mockito.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 

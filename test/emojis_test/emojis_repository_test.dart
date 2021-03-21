@@ -5,8 +5,8 @@ import 'package:bliss_test/_core/keys.dart';
 import 'package:bliss_test/home/repositories/emojis_repository.dart';
 import 'package:bliss_test/home/services/emoji_service.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 import 'package:matcher/matcher.dart';
+import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MockService extends Mock implements EmojiServices {}

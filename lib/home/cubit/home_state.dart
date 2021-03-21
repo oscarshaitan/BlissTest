@@ -4,33 +4,42 @@ part of 'home_cubit.dart';
 abstract class HomeState {
   Emoji get randomEmoji;
 
-  Map<String, dynamic> get emojisMap;
+  String get userAvatarUrl;
 }
 
 class HomeInitial extends HomeState {
   final Emoji randomEmoji = null;
-  final Map<String, dynamic> emojisMap = null;
+  final String userAvatarUrl = null;
 }
 
 class HomeRenderEmoji extends HomeState {
   final Emoji randomEmoji;
 
-  final Map<String, dynamic> emojisMap;
+  final String userAvatarUrl = null;
 
   HomeRenderEmoji({
     @required this.randomEmoji,
-    @required this.emojisMap,
   });
 }
 
 class NavigateToEmojisList extends HomeState {
   final Emoji randomEmoji;
-
-  final Map<String, dynamic> emojisMap;
+  final String userAvatarUrl;
   final List<Emoji> emojis;
 
-  NavigateToEmojisList(
-      {@required this.randomEmoji,
-      @required this.emojisMap,
-      @required this.emojis});
+  NavigateToEmojisList({
+    @required this.randomEmoji,
+    @required this.emojis,
+    @required this.userAvatarUrl,
+  });
+}
+
+class HomeRenderUser extends HomeState {
+  final Emoji randomEmoji = null;
+
+  final String userAvatarUrl;
+
+  HomeRenderUser({
+    @required this.userAvatarUrl,
+  });
 }

@@ -11,6 +11,7 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   final FetchEmojis _fetchEmojis;
   final Random _random = Random();
+  Map<String, dynamic> _emojisMap;
 
   HomeCubit(this._fetchEmojis) : super(HomeInitial()) {
     _init();
@@ -19,32 +20,37 @@ class HomeCubit extends Cubit<HomeState> {
   int _next(int min, int max) => min + _random.nextInt(max - min);
 
   _init() async {
-    Map<String, dynamic> emojis = await _fetchEmojis();
+    _emojisMap = await _fetchEmojis();
 
-    emit(HomeRenderEmoji(randomEmoji: _randomEmoji(emojis), emojisMap: emojis));
+    emit(HomeRenderEmoji(randomEmoji: _randomEmoji(_emojisMap)));
   }
 
   randomEmoji() {
     emit(HomeRenderEmoji(
-      emojisMap: state.emojisMap,
       randomEmoji: _randomEmoji(),
     ));
   }
 
   navigateToEmojiList() {
     List<Emoji> emojis = [];
-    state.emojisMap.forEach((key, value) {
+    _emojisMap.forEach((key, value) {
       emojis.add(Emoji(name: key, url: value));
     });
 
     emit(NavigateToEmojisList(
         randomEmoji: state.randomEmoji,
-        emojisMap: state.emojisMap,
-        emojis: emojis));
+        emojis: emojis,
+        userAvatarUrl: state.userAvatarUrl));
+  }
+
+  searchUser(String user) {
+    if (user != null && user.isNotEmpty) {
+      //todo
+    }
   }
 
   Emoji _randomEmoji([Map<String, dynamic> emojis]) {
-    Map<String, dynamic> emojisLoaded = state.emojisMap ?? emojis;
+    Map<String, dynamic> emojisLoaded = _emojisMap ?? emojis;
     int randomIndex = _next(0, emojisLoaded.values.length);
     String name = emojisLoaded.keys.toList()[randomIndex];
     String url = emojisLoaded.values.toList()[randomIndex];

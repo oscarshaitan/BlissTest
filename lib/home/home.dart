@@ -1,4 +1,5 @@
 import 'package:bliss_test/_core/widgets/emoji_tile.dart';
+import 'package:bliss_test/_core/widgets/network_image_widget.dart';
 import 'package:bliss_test/emoji_list/emoji_list_view.dart';
 import 'package:bliss_test/home/widgets/home_button.dart';
 import 'package:flutter/material.dart';
@@ -32,28 +33,8 @@ class HomeView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Flexible(
-                    child: Column(
-                      children: [
-                        EmojiTile(
-                          loading: state is HomeInitial,
-                          emoji: state.randomEmoji,
-                        ),
-                        if (!(state is HomeInitial))
-                          Container(
-                            margin: EdgeInsets.only(bottom: 16),
-                            child: Center(
-                              child: Text(
-                                state.randomEmoji.name,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyText1,
-                              ),
-                            ),
-                          )
-                      ],
-                    ),
+                  _HomeImage(
+                    state: state,
                   ),
                   BlissButton(
                     onPressed: _cubit.randomEmoji,
@@ -63,16 +44,114 @@ class HomeView extends StatelessWidget {
                     height: 16,
                   ),
                   BlissButton(
-                    onPressed: () {
-                      _cubit.navigateToEmojiList();
-                    },
+                    onPressed: _cubit.navigateToEmojiList,
                     label: 'Emoji List',
-                  )
+                  ),
+                  _SearchUserWidget(onSearch: _cubit.searchUser),
                 ],
               ),
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class _SearchUserWidget extends StatelessWidget {
+  final Function(String user) onSearch;
+
+  _SearchUserWidget({
+    Key key,
+    @required this.onSearch,
+  }) : super(key: key);
+
+  final TextEditingController controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 16),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: controller,
+                decoration: InputDecoration(
+                  hintText: 'GitHub User',
+                  hintStyle: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Colors.white54,
+                      ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white54,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ),
+                ),
+                onSubmitted: onSearch,
+              ),
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.search_outlined,
+                color: Theme.of(context).accentColor,
+              ),
+              onPressed: () {
+                onSearch(controller.text);
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _HomeImage extends StatelessWidget {
+  final HomeState state;
+
+  const _HomeImage({
+    Key key,
+    @required this.state,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: AnimatedSwitcher(
+        duration: Duration(milliseconds: 350),
+        child: state is HomeRenderEmoji
+            ? Column(
+                children: [
+                  EmojiTile(
+                    emoji: state.randomEmoji,
+                  ),
+                  if (!(state is HomeInitial))
+                    Container(
+                      margin: EdgeInsets.only(bottom: 16),
+                      child: Center(
+                        child: Text(
+                          state.randomEmoji.name,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      ),
+                    )
+                ],
+              )
+            : Center(
+                child: NetworkImageWidget(
+                  url: state?.userAvatarUrl,
+                ),
+              ),
       ),
     );
   }

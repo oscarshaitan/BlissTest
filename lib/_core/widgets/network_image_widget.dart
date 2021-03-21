@@ -13,13 +13,18 @@ class NetworkImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: url,
-      height: 75,
-      placeholder: (context, _) {
-        return LoadingWidget();
-      },
-      errorWidget: (context, url, error) => Icon(Icons.error),
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: 350),
+      child: url == null
+          ? LoadingWidget()
+          : CachedNetworkImage(
+              imageUrl: url,
+              height: 75,
+              placeholder: (context, _) {
+                return LoadingWidget();
+              },
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
     );
   }
 }

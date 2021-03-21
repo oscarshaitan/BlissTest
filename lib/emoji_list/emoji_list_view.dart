@@ -61,15 +61,14 @@ class _EmojiListViewState extends State<EmojiListView> {
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 4,
-                                    crossAxisSpacing: 5.0,
-                                    mainAxisSpacing: 5.0,
+                                    crossAxisSpacing: 5,
+                                    mainAxisSpacing: 5,
                                     childAspectRatio: 0.9),
                             itemBuilder: (BuildContext context, int index) {
                               return EmojiTile(
                                 onTap: () {
                                   _cubit.removeTile(state.emojis[index]);
                                 },
-                                loading: false,
                                 emoji: state.emojis[index],
                               );
                             },

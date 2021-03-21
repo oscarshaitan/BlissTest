@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../injection_container.dart';
 
 class EmojiListView extends StatefulWidget {
-  final List<Emoji> emojis;
+  final List<ImageApp> emojis;
 
   EmojiListView(this.emojis);
 
@@ -65,11 +65,11 @@ class _EmojiListViewState extends State<EmojiListView> {
                                     mainAxisSpacing: 5,
                                     childAspectRatio: 0.9),
                             itemBuilder: (BuildContext context, int index) {
-                              return EmojiTile(
+                              return ImageTile(
                                 onTap: () {
                                   _cubit.removeTile(state.emojis[index]);
                                 },
-                                emoji: state.emojis[index],
+                                image: state.emojis[index],
                               );
                             },
                           ),

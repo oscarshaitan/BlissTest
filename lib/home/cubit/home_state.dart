@@ -2,44 +2,58 @@ part of 'home_cubit.dart';
 
 @immutable
 abstract class HomeState {
-  Emoji get randomEmoji;
-
-  String get userAvatarUrl;
+  ImageApp get currentImage;
 }
 
 class HomeInitial extends HomeState {
-  final Emoji randomEmoji = null;
+  final ImageApp currentImage = null;
   final String userAvatarUrl = null;
 }
 
-class HomeRenderEmoji extends HomeState {
-  final Emoji randomEmoji;
+class HomeRenderImage extends HomeState {
+  final ImageApp currentImage;
 
-  final String userAvatarUrl = null;
-
-  HomeRenderEmoji({
-    @required this.randomEmoji,
+  HomeRenderImage({
+    @required this.currentImage,
   });
 }
 
 class NavigateToEmojisList extends HomeState {
-  final Emoji randomEmoji;
-  final String userAvatarUrl;
-  final List<Emoji> emojis;
+  final ImageApp currentImage;
+  final List<ImageApp> emojis;
 
   NavigateToEmojisList({
-    @required this.randomEmoji,
+    @required this.currentImage,
+    @required this.emojis,
+  });
+}
+
+class NavigateToUsersAvatarList extends HomeState {
+  final ImageApp currentImage;
+  final List<ImageApp> images;
+
+  NavigateToUsersAvatarList({
+    @required this.currentImage,
+    @required this.images,
+  });
+}
+
+class FetchingUser extends HomeState {
+  final ImageApp currentImage;
+  final String userAvatarUrl;
+  final List<Image> emojis;
+
+  FetchingUser({
+    @required this.currentImage,
     @required this.emojis,
     @required this.userAvatarUrl,
   });
 }
 
-class HomeRenderUser extends HomeState {
-  final Emoji randomEmoji = null;
+class FetchError extends HomeState {
+  final String error;
+  final ImageApp currentImage = null;
+  final String userAvatarUrl = null;
 
-  final String userAvatarUrl;
-
-  HomeRenderUser({
-    @required this.userAvatarUrl,
-  });
+  FetchError(this.error);
 }

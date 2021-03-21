@@ -1,9 +1,10 @@
 import 'package:bliss_test/_core/widgets/emoji_tile.dart';
-import 'package:bliss_test/_core/widgets/network_image_widget.dart';
+import 'package:bliss_test/avatar_list/avatar_list_view.dart';
 import 'package:bliss_test/emoji_list/emoji_list_view.dart';
 import 'package:bliss_test/home/widgets/home_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 
 import '../injection_container.dart';
 import 'cubit/home_cubit.dart';
@@ -23,32 +24,72 @@ class HomeView extends StatelessWidget {
                   builder: (context) => EmojiListView(state.emojis)),
             );
           }
+          if (state is NavigateToUsersAvatarList) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                  builder: (context) => AvatarListView(state.images)),
+            );
+          }
         },
         builder: (context, state) {
           return Scaffold(
             backgroundColor: Theme.of(context).primaryColor,
-            body: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  _HomeImage(
-                    state: state,
-                  ),
-                  BlissButton(
-                    onPressed: _cubit.randomEmoji,
-                    label: 'Random Emoji',
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  BlissButton(
-                    onPressed: _cubit.navigateToEmojiList,
-                    label: 'Emoji List',
-                  ),
-                  _SearchUserWidget(onSearch: _cubit.searchUser),
-                ],
+            body: LoadingOverlay(
+              isLoading: state is FetchingUser,
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+                child: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 350),
+                  child: state is FetchError
+                      ? Column(
+                          children: [
+                            Icon(
+                              Icons.error,
+                              color: Colors.white,
+                            ),
+                            Center(
+                              child: Text(
+                                state.error,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1
+                                    .copyWith(color: Colors.redAccent),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                _cubit.init();
+                              },
+                              child: Text('Refresh'),
+                            )
+                          ],
+                        )
+                      : Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            _HomeImage(
+                              state: state,
+                            ),
+                            BlissButton(
+                              onPressed: _cubit.randomEmoji,
+                              label: 'Random Emoji',
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            BlissButton(
+                              onPressed: _cubit.navigateToEmojiList,
+                              label: 'Emoji List',
+                            ),
+                            _SearchUserWidget(onSearch: _cubit.searchUser),
+                            BlissButton(
+                              onPressed: _cubit.navigatetoAvatarList,
+                              label: 'Avatar List',
+                            ),
+                          ],
+                        ),
+                ),
               ),
             ),
           );
@@ -124,34 +165,31 @@ class _HomeImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: AnimatedSwitcher(
-        duration: Duration(milliseconds: 350),
-        child: state is HomeRenderEmoji
-            ? Column(
-                children: [
-                  EmojiTile(
-                    emoji: state.randomEmoji,
-                  ),
-                  if (!(state is HomeInitial))
-                    Container(
-                      margin: EdgeInsets.only(bottom: 16),
-                      child: Center(
-                        child: Text(
-                          state.randomEmoji.name,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ),
-                    )
-                ],
-              )
-            : Center(
-                child: NetworkImageWidget(
-                  url: state?.userAvatarUrl,
-                ),
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 16),
+        child: AnimatedSwitcher(
+          duration: Duration(milliseconds: 350),
+          child: Column(
+            children: [
+              ImageTile(
+                image: state?.currentImage,
               ),
+              if (!(state is HomeInitial))
+                Container(
+                  margin: EdgeInsets.only(bottom: 16),
+                  child: Center(
+                    child: Text(
+                      state.currentImage.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ),
+                )
+            ],
+          ),
+        ),
       ),
     );
   }

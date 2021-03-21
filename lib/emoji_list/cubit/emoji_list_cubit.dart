@@ -6,15 +6,15 @@ part 'emoji_list_state.dart';
 
 class EmojiListCubit extends Cubit<EmojiListState> {
   EmojiListCubit() : super(EmojiListInitial());
-  List<Emoji> _originalEmojis;
+  List<ImageApp> _originalEmojis;
 
-  init(List<Emoji> emojis) {
+  init(List<ImageApp> emojis) {
     this._originalEmojis = []..addAll(emojis);
     emit(EmojiListLoaded(emojis));
   }
 
-  removeTile(Emoji emoji) {
-    List<Emoji> newEmojis = []..addAll(state.emojis)..remove(emoji);
+  removeTile(ImageApp emoji) {
+    List<ImageApp> newEmojis = []..addAll(state.emojis)..remove(emoji);
     emit(RemovingEmoji(emojis: newEmojis, name: emoji.name));
   }
 

@@ -1,6 +1,6 @@
 import 'package:bliss_test/_core/repositories/user_repository.dart';
 import 'package:bliss_test/home/services/user_services.dart';
-import 'package:bliss_test/home/use_case/fectch_user_avatar.dart';
+import 'package:bliss_test/home/use_case/fetch_user_avatar.dart';
 import 'package:bliss_test/home/use_case/fetch_saved_avatars.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;

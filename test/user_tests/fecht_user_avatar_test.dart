@@ -1,7 +1,7 @@
 import 'package:bliss_test/_core/exceptions.dart';
 import 'package:bliss_test/_core/models/emoji.dart';
 import 'package:bliss_test/_core/repositories/user_repository.dart';
-import 'package:bliss_test/home/use_case/fectch_user_avatar.dart';
+import 'package:bliss_test/home/use_case/fetch_user_avatar.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:mockito/mockito.dart';

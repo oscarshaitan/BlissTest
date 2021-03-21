@@ -56,7 +56,8 @@ void main() {
     when(mockHttpClient.get(any))
         .thenAnswer((_) async => http.Response(responseMocked, 200));
     service.fetchUserAvatar('userName');
-    verify(mockHttpClient.get(Uri.parse('https://api.github.com/users/userName')));
+    verify(
+        mockHttpClient.get(Uri.parse('https://api.github.com/users/userName')));
   });
 
   test('when backend respond 200, get a String with the user data', () async {
@@ -66,19 +67,19 @@ void main() {
     expect(result, responseMocked);
   });
 
-  test('when backend respond other than 200, throw FailFetchUserAvatar', () async {
+  test('when backend respond other than 200, throw FailFetchUserAvatar',
+      () async {
     when(mockHttpClient.get(any))
         .thenAnswer((_) async => http.Response('', 500));
 
-    expect(
-            () => service.fetchUserAvatar(''), throwsA(TypeMatcher<FailFetchUserAvatar>()));
+    expect(() => service.fetchUserAvatar(''),
+        throwsA(TypeMatcher<FailFetchUserAvatar>()));
   });
 
   test('when fail , throw FailFetchEmojis', () async {
     when(mockHttpClient.get(any)).thenThrow(FailFetchUserAvatar());
 
-    expect(
-            () => service.fetchUserAvatar(''), throwsA(TypeMatcher<FailFetchUserAvatar>()));
+    expect(() => service.fetchUserAvatar(''),
+        throwsA(TypeMatcher<FailFetchUserAvatar>()));
   });
-
 }

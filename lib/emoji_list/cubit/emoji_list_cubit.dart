@@ -14,7 +14,9 @@ class EmojiListCubit extends Cubit<EmojiListState> {
   }
 
   removeTile(ImageApp emoji) {
-    List<ImageApp> newEmojis = []..addAll(state.emojis)..remove(emoji);
+    List<ImageApp> newEmojis = []
+      ..addAll(state.emojis)
+      ..remove(emoji);
     emit(RemovingEmoji(emojis: newEmojis, name: emoji.name));
   }
 

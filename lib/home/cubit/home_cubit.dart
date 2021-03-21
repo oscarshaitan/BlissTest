@@ -29,7 +29,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       _emojisMap = await _fetchEmojis();
       emit(HomeRenderImage(currentImage: _randomEmoji(_emojisMap)));
-    } on FailFetchEmojis catch (e) {
+    } on FailFetchEmojis catch (_) {
       emit(FetchError('Something happen fetching the emojis'));
     }
   }
@@ -65,7 +65,7 @@ class HomeCubit extends Cubit<HomeState> {
         ImageApp userAvatar = await _fetchUserAvatar(user);
         emit(HomeRenderImage(currentImage: userAvatar));
       }
-    } on FailFetchEmojis catch (e) {
+    } on FailFetchEmojis catch (_) {
       emit(FetchError('Something happen fetching the user avatar'));
     }
   }

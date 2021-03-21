@@ -8,6 +8,4 @@ class ImageApp {
     @required this.name,
     @required this.url,
   });
-
-
 }

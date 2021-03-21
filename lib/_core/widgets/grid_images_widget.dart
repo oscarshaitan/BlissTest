@@ -19,24 +19,24 @@ class GridImageAppWidget extends StatelessWidget {
       duration: Duration(milliseconds: 350),
       child: images.isEmpty
           ? Center(
-        child: Text('No Images to show'),
-      )
+              child: Text('No Images to show'),
+            )
           : GridView.builder(
-        itemCount: images.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
-            childAspectRatio: 0.9),
-        itemBuilder: (BuildContext context, int index) {
-          return ImageTile(
-            onTap: () {
-              onTap(images[index]);
-            },
-            image: images[index],
-          );
-        },
-      ),
+              itemCount: images.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  childAspectRatio: 0.9),
+              itemBuilder: (BuildContext context, int index) {
+                return ImageTile(
+                  onTap: () {
+                    onTap(images[index]);
+                  },
+                  image: images[index],
+                );
+              },
+            ),
     );
   }
 }

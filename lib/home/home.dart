@@ -1,6 +1,7 @@
 import 'package:bliss_test/_core/widgets/emoji_tile.dart';
 import 'package:bliss_test/avatar_list/avatar_list_view.dart';
 import 'package:bliss_test/emoji_list/emoji_list_view.dart';
+import 'package:bliss_test/google_repos/google_repos_view.dart';
 import 'package:bliss_test/home/widgets/home_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,6 +87,18 @@ class HomeView extends StatelessWidget {
                             BlissButton(
                               onPressed: _cubit.navigatetoAvatarList,
                               label: 'Avatar List',
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            BlissButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => GoogleReposView()),
+                                );
+                              },
+                              label: 'Google Repos',
                             ),
                           ],
                         ),

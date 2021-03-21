@@ -1,5 +1,4 @@
 import 'package:bliss_test/_core/models/emoji.dart';
-import 'package:bliss_test/_core/widgets/emoji_tile.dart';
 import 'package:bliss_test/_core/widgets/grid_images_widget.dart';
 import 'package:bliss_test/_core/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +43,7 @@ class _AvatarListViewState extends State<AvatarListView> {
         builder: (context, state) {
           return Scaffold(
             backgroundColor: Theme.of(context).primaryColor,
+            appBar: AppBar(elevation: 0),
             body: SafeArea(
               child: Container(
                 padding: EdgeInsets.symmetric(

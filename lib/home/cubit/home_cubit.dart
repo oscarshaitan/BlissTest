@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:bliss_test/_core/exceptions.dart';
 import 'package:bliss_test/_core/models/emoji.dart';
-import 'package:bliss_test/home/use_case/fetch_user_avatar.dart';
 import 'package:bliss_test/home/use_case/fetch_emojis.dart';
 import 'package:bliss_test/home/use_case/fetch_saved_avatars.dart';
+import 'package:bliss_test/home/use_case/fetch_user_avatar.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';

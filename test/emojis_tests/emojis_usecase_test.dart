@@ -32,7 +32,5 @@ void main() {
   test('when repo throw FailFetchEmojis then throw same error', () async {
     when(repo.fetchEmojis()).thenThrow(FailFetchEmojis());
     expect(() => useCase(), throwsA(TypeMatcher<FailFetchEmojis>()));
-
   });
-
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 
-class ImageApp {
+class GitHubRepo {
   final String name;
   final String url;
 
-  const ImageApp({
+  const GitHubRepo({
     @required this.name,
     @required this.url,
   });

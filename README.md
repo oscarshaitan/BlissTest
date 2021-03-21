@@ -1,16 +1,17 @@
 # bliss_test
 
-A new Flutter application.
+This app was created to compelte the Bliss Application test.
 
-## Getting Started
+Developed to Ios, Android
+Known Issues:
+Web, need improvement on the repos view pagination
+Not Tested for Widnows,Linux
+Test cover DAta and domain Layer
+need cover Cubit, and add some UI tests
+Can run the tests with 'flutter test' command
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Extra Functions:
+name of user and icons captured and displayed
+onTap on ech Tile of google repos , opens web to show the page of the repo

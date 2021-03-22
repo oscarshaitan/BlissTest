@@ -17,6 +17,7 @@ class _GoogleReposViewState extends State<GoogleReposView> {
   @override
   void initState() {
     _controller.addListener(() {
+      print(_controller.position.maxScrollExtent);
       if (_controller.position.maxScrollExtent - _controller.offset < 150) {
         _cubit.loadMoreRepos();
       }
@@ -46,6 +47,7 @@ class _GoogleReposViewState extends State<GoogleReposView> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     onTap: () {
+
                       _cubit.goToRepoPage(
                         state.repos[index].url,
                       );

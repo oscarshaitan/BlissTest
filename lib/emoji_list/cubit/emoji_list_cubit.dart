@@ -1,5 +1,6 @@
 import 'package:bliss_test/_core/models/emoji.dart';
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 part 'emoji_list_state.dart';

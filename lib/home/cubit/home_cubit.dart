@@ -6,6 +6,7 @@ import 'package:bliss_test/home/use_case/fetch_emojis.dart';
 import 'package:bliss_test/home/use_case/fetch_saved_avatars.dart';
 import 'package:bliss_test/home/use_case/fetch_user_avatar.dart';
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
@@ -15,10 +16,12 @@ class HomeCubit extends Cubit<HomeState> {
   final FetchEmojis _fetchEmojis;
   final FetchUserAvatar _fetchUserAvatar;
   final FetchSavedAvatars _fetchSavedAvatars;
-  final Random _random = Random();
+  final Random _random;
+
   Map<String, dynamic> _emojisMap;
 
-  HomeCubit(this._fetchEmojis, this._fetchUserAvatar, this._fetchSavedAvatars)
+  HomeCubit(this._fetchEmojis, this._fetchUserAvatar, this._fetchSavedAvatars,
+      this._random)
       : super(HomeInitial()) {
     init();
   }

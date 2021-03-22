@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-class ImageApp {
+class ImageApp extends Equatable {
   final String name;
   final String url;
 
@@ -8,4 +9,7 @@ class ImageApp {
     @required this.name,
     @required this.url,
   });
+
+  @override
+  List<Object> get props => [name, url];
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bliss_test/_core/repositories/user_repository.dart';
 import 'package:bliss_test/home/services/user_services.dart';
 import 'package:bliss_test/home/use_case/fetch_saved_avatars.dart';
@@ -5,6 +7,7 @@ import 'package:bliss_test/home/use_case/fetch_user_avatar.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '_core/keys.dart';
 import 'avatar_list/cubit/avatar_list_cubit.dart';
@@ -46,10 +49,11 @@ init() async {
   sl.registerLazySingleton(() => GoogleReposServices(sl()));
 
   //CUBIT
-  sl.registerFactory(() => HomeCubit(sl(), sl(), sl()));
+  sl.registerFactory(() => HomeCubit(sl(), sl(), sl(), sl()));
   sl.registerFactory(() => EmojiListCubit());
   sl.registerFactory(() => AvatarListCubit(sl()));
-  sl.registerFactory(() => GoogleReposCubit(sl()));
+  sl.registerFactory(() =>
+      GoogleReposCubit(sl(), sl.get<Function>(instanceName: 'launchUrl')));
 
   //GLOBAL VARS
   sl.registerLazySingleton<Map<String, dynamic>>(() => {},
@@ -62,4 +66,8 @@ init() async {
   sl.registerSingleton<SharedPreferences>(prefs);
 
   sl.registerLazySingleton(() => http.Client());
+
+  sl.registerLazySingleton<Function>(() => launch, instanceName: 'launchUrl');
+
+  sl.registerLazySingleton(() => Random());
 }

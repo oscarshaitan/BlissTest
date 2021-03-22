@@ -1,6 +1,7 @@
 import 'package:bliss_test/_core/models/emoji.dart';
 import 'package:bliss_test/avatar_list/use_case/remove_avatar_user.dart';
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 part 'avatar_list_state.dart';

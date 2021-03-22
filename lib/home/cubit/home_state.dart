@@ -1,13 +1,15 @@
 part of 'home_cubit.dart';
 
 @immutable
-abstract class HomeState {
+abstract class HomeState extends Equatable {
   ImageApp get currentImage;
 }
 
 class HomeInitial extends HomeState {
   final ImageApp currentImage = null;
-  final String userAvatarUrl = null;
+
+  @override
+  List<Object> get props => [];
 }
 
 class HomeRenderImage extends HomeState {
@@ -16,6 +18,9 @@ class HomeRenderImage extends HomeState {
   HomeRenderImage({
     @required this.currentImage,
   });
+
+  @override
+  List<Object> get props => [currentImage];
 }
 
 class NavigateToEmojisList extends HomeState {
@@ -26,6 +31,9 @@ class NavigateToEmojisList extends HomeState {
     @required this.currentImage,
     @required this.emojis,
   });
+
+  @override
+  List<Object> get props => [currentImage, emojis];
 }
 
 class NavigateToUsersAvatarList extends HomeState {
@@ -36,6 +44,9 @@ class NavigateToUsersAvatarList extends HomeState {
     @required this.currentImage,
     @required this.images,
   });
+
+  @override
+  List<Object> get props => [currentImage, images];
 }
 
 class FetchingUser extends HomeState {
@@ -48,6 +59,9 @@ class FetchingUser extends HomeState {
     @required this.emojis,
     @required this.userAvatarUrl,
   });
+
+  @override
+  List<Object> get props => [currentImage, emojis, userAvatarUrl];
 }
 
 class FetchError extends HomeState {
@@ -56,4 +70,7 @@ class FetchError extends HomeState {
   final String userAvatarUrl = null;
 
   FetchError(this.error);
+
+  @override
+  List<Object> get props => [error];
 }

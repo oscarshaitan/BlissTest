@@ -119,7 +119,7 @@ void main() {
         .thenAnswer((_) async => http.Response(responseMocked, 200));
     service.fetchGoogleRepos(0);
     verify(mockHttpClient.get(Uri.parse(
-        'https://api.github.com/users/google/repos?page=0&per_page=15')));
+        'https://api.github.com/users/google/repos?page=0&per_page=25')));
   });
 
   test('when backend respond 200, get a String with the user data', () async {

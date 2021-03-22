@@ -3,11 +3,10 @@
 This app was created to compelte the Bliss Application test.
 
 Developed to Ios, Android
-Known Issues:
-Web, need improvement on the repos view pagination
+Tested on : ios, Android, Web
 Not Tested for Widnows,Linux
-Test cover DAta and domain Layer
-need cover Cubit, and add some UI tests
+Test cover Data and domain Layer
+all cubit testesd but HomeCubit, and ther is no UI test or integration test
 Can run the tests with 'flutter test' command
 
 

@@ -21,7 +21,7 @@ jobs:
     - name: Upload iPA
       uses: actions/upload-artifact@master
       with:
-        name: ios-build
+        name: ios-build.ipa
         path: build/ios/iphoneos
   build_apk:
     name: Build Flutter (Android)
@@ -54,14 +54,14 @@ jobs:
     - name: Download Artifact
       uses: actions/download-artifact@master
       with:
-        name: ios-build
+        name: ios-build.ipa
     - name: Upload IPA
       uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
       with:
         appId: ${{secrets.FIREBASE_IOS_APPID}}
         token: ${{secrets.FIREBASE_TOKEN}}
         groups: testers
-        file: Runner.ipa
+        file: ios-build.ipa
   beta_apk:
     name: Upload Android Beta to Firebase App Distribution
     needs: [build_apk]

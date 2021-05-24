@@ -39,7 +39,7 @@ jobs:
     - name: Upload APK
       uses: actions/upload-artifact@master
       with:
-        name: app-debug
+        name: app-debug.apk
         path: build/app/outputs/flutter-apk
   beta_ios:
     name: Upload iOS Beta to Firebase App Distribution
@@ -56,7 +56,7 @@ jobs:
       with:
         name: ios-build
     - name: Upload IPA
-      uses: wzieba/Firebase-Distribution-Github-Action@v1.0.0
+      uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
       with:
         appId: ${{secrets.FIREBASE_IOS_APPID}}
         token: ${{secrets.FIREBASE_TOKEN}}
@@ -75,11 +75,11 @@ jobs:
     - name: Download Artifact
       uses: actions/download-artifact@master
       with:
-        name: app-debug
+        name: app-debug.apk
     - name: Upload APK
-      uses: wzieba/Firebase-Distribution-Github-Action@v1.0.0
+      uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
       with:
         appId: ${{secrets.FIREBASE_ANDROID_APPID}}
         token: ${{secrets.FIREBASE_TOKEN}}
         group: testers
-        file: app-release.aap
+        file: app-debug.apk

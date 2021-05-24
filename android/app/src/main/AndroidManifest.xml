@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.otigreros.bliss_test">
-   <application
+
+    <!-- Required to fetch data from the internet. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
         android:label="bliss_test"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -23,7 +23,9 @@ jobs:
     - uses: sparkfabrik/ios-build-action@v1.1.0
       with:
         project-path: ios/Runner.xcodeproj
-        p12-cer-base64: ${{ secrets.P12 }}
+        p12-base64: ${{ secrets.P12 }}
+        #p12-key-base64: ${{ secrets.P12 }}
+        #p12-cer-base64: ${{ secrets.P12 }}
         export-method: ad-hoc
         mobileprovision-base64: ${{ secrets.PROFILE }}
         code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}

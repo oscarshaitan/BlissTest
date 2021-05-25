@@ -18,7 +18,7 @@ jobs:
           channel: 'stable'
           
     - run: flutter clean
-    - run: flutter get
+    - run: flutter pub get
 
     - uses: sparkfabrik/ios-build-action@v1.1.0
       with:

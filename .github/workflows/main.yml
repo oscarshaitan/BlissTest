@@ -17,12 +17,24 @@ jobs:
           channel: 'dev'
     - run: flutter pub get
     - run: flutter clean
-    - run: flutter build ios --release --no-codesign
+    - run: flutter build ipa
+    
+    - name: Add P12
+      uses: apple-actions/import-codesign-certs@v1
+      with: 
+        p12-file-base64: ${{ secrets.P12 }}
+        p12-password: ${{ secrets.P12_PASSWORD }}
+        
+    - name: Build IPA
+    - run: cd ios
+    - run: xcodebuild -exportArchive -archivePath ../build/ios/archive/Runner.xcarchive -exportPath ../build/ios/archive -exportOptionsPlist ExportOptions.plist
+    - run: cd ..
     - name: Upload iPA
       uses: actions/upload-artifact@master
       with:
-        name: Runner.app
-        path: build/ios/iphoneos
+        name: bliss_test.ipa
+        path: build/ios/archive
+        
   build_apk:
     name: Build Flutter (Android)
     runs-on: ubuntu-latest
@@ -41,6 +53,7 @@ jobs:
       with:
         name: app-debug.apk
         path: build/app/outputs/flutter-apk
+        
   beta_ios:
     name: Upload iOS Beta to Firebase App Distribution
     needs: [build_ios]
@@ -54,14 +67,14 @@ jobs:
     - name: Download Artifact
       uses: actions/download-artifact@master
       with:
-        name: Runner.app
+        name: bliss_test.ipa
     - name: Upload IPA
       uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
       with:
         appId: ${{secrets.FIREBASE_IOS_APPID}}
         token: ${{secrets.FIREBASE_TOKEN}}
         groups: testers
-        file: Runner.app
+        file: bliss_test.ipa
   beta_apk:
     name: Upload Android Beta to Firebase App Distribution
     needs: [build_apk]

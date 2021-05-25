@@ -24,15 +24,9 @@ jobs:
       with:
           channel: 'dev'
     - run: flutter clean
-    
     - run: flutter build ipa
 
-    
-    #- run: cd ios
-    #- run: xcodebuild -exportArchive -archivePath ../build/ios/archive/Runner.xcarchive -exportPath ../build/ios/archive -exportOptionsPlist ExportOptions.plist
-    #- run: cd ..
-
-    - uses: sparkfabrik/ios-build-action@v1.0.0
+    - uses: sparkfabrik/ios-build-action@v1.1.0
       with:
         project-path: ios/Runner.xcodeproj
         p12-key-base64: ${{ secrets.P12 }}

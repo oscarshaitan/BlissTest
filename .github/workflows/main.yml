@@ -13,18 +13,12 @@ jobs:
       with:
         java-version: '12.x'
         
-    - name: Add P12
-      uses: apple-actions/import-codesign-certs@v1
-      with: 
-        p12-file-base64: ${{ secrets.P12 }}
-        p12-password: ${{ secrets.P12_PASSWORD }}
-        
-    
     - uses: subosito/flutter-action@v1
       with:
-          channel: 'dev'
+          channel: 'stable'
+          
     - run: flutter clean
-    - run: flutter build ipa
+    - run: flutter get
 
     - uses: sparkfabrik/ios-build-action@v1.1.0
       with:

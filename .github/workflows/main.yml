@@ -19,20 +19,23 @@ jobs:
           
     - run: flutter clean
     - run: flutter pub get
-
-    - uses: sparkfabrik/ios-build-action@v1.1.0
-      with:
-        project-path: ios/Runner.xcodeproj
-        p12-base64: ${{ secrets.P12 }}
-        #p12-key-base64: ${{ secrets.P12 }}
-        #p12-cer-base64: ${{ secrets.P12 }}
-        export-method: ad-hoc
-        mobileprovision-base64: ${{ secrets.PROFILE }}
-        code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
-        team-id: ${{ secrets.TEAM_ID }}
-        workspace-path: ios/Runner.xcworkspace
-        output-path: build/ios/archive
-
+    
+    - name: Create and Install Certificates
+    - run: echo ${{ secrets.P12 }}  | base64 --decode > CertificatesDecoded.p12
+    - run: security import CertificatesDecoded.p12 -P ${{ secrets.P12_PASSWORD }}
+    
+    - run: flutter build ipa
+    
+    - name: Create and install MobileProvision
+    - run: echo ${{ secrets.MOBILE_PROVISION }}  | base64 --decode > MobileProvision.mobileprovision
+    - run: uuid=$(grep UUID -A1 -a MobileProvision.mobileprovision | grep -io "[-A-F0-9]\{36\}")
+    - run: cp MobileProvision.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
+    
+    - run: cd ios
+    
+    - name: Create IPA
+    - run: xcodebuild -exportArchive -archivePath ../build/ios/archive/Runner.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath ../build/ios/iosrelease.ipa -allowProvisioningUpdates
+    
     - name: Upload iPA
       uses: actions/upload-artifact@master
       with:

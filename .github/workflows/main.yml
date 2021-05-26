@@ -26,8 +26,7 @@ jobs:
     
      #Create and install MobileProvision
     - run: echo ${{ secrets.MOBILE_PROVISION }}  | base64 --decode > MobileProvision.mobileprovision
-    - run: uuid=$(grep UUID -A1 -a MobileProvision.mobileprovision | grep -io "[-A-F0-9]\{36\}")
-    - run: cp MobileProvision.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
+    - run: cp MobileProvision.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$(grep UUID -A1 -a MobileProvision.mobileprovision | grep -io "[-A-F0-9]\{36\}").mobileprovision
     
     - run: flutter build ipa
     

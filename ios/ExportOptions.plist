@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<dict>
-    <key>method</key>
-    <string>ad-hoc</string>
-</dict>
+<!--
+   ExportOptions.plist
+   Runner
+
+   Created by Oscar Tigreros on 26/05/21.
+   Copyright (c) 2021 . All rights reserved.
+-->
 <plist version="1.0">
-<dict/>
+    <dict>
+        <key>method</key>
+        <string>ad-hoc</string>
+        <key>provisioningProfiles</key>
+        <dict>
+            <key>com.otigreros.blissTest2</key>
+            <string>Bliss Test</string>
+        </dict>
+    </dict>
 </plist>

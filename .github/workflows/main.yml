@@ -33,10 +33,11 @@ jobs:
       with:
         project-path: App.xcodeproj
         p12-base64: ${{ secrets.P12 }}
+        certificate-password: ${{ secrets.P12_PASSWORD }}       
         mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
         code-signing-identity: 'Apple Distribution: Keamore Limited'
         team-id: ${{ secrets.TEAM_ID }}
-        out-puth-path: build/ios/archive
+        output-path: build/ios/archive
 
     #- run: flutter build ipa
     

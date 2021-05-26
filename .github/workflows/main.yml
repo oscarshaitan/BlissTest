@@ -31,8 +31,9 @@ jobs:
     
     - uses: sparkfabrik/ios-build-action@v1.1.0
       with:
-        project-path: App.xcodeproj
+        project-path: ios/Runner.xcodeproj
         p12-base64: ${{ secrets.P12 }}
+        export-method: ad-hoc
         certificate-password: ${{ secrets.P12_PASSWORD }}       
         mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
         code-signing-identity: 'Apple Distribution: Keamore Limited'

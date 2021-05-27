@@ -8,6 +8,7 @@ on:
 jobs:
 
   build_ios:
+    name: Build IOS
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -53,6 +54,7 @@ jobs:
         run: flutter build ipa --export-options-plist=$GITHUB_WORKSPACE/ios/exportOptions.plist
 
   build_android:
+    name: Build Android
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -62,10 +64,16 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7'
+
       - name: Install Java
         uses: actions/setup-java@v1
         with:
           java-version: '12.x'
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
 
       - name: Install Android Gems
         working-directory: ${{ github.workspace }}/android

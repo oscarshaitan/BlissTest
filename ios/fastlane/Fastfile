@@ -25,9 +25,9 @@ platform :ios do
     lane :install_certificate_and_profile do
 
         api_key = app_store_connect_api_key(
-            key_id: UH9XSQQN27,
-            issuer_id: Oscar CI key temp,
-            key_content: -----BEGIN\ PRIVATE\ KEY-----\\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQg+EV6bkLuwOhBgiXC\\nMoK3o+oH0S+ujdkNu813UhjInvOgCgYIKoZIzj0DAQehRANCAAS1S01O1PUNg9Wb\\n66vG8zA1xeXh4RlA7yOzUMLGelirNzlpIlQePfhKwlRyuGp9JhceeM1tCQKZl5Dt\\nnH8+zMwx\\n-----END\ PRIVATE\ KEY-----,
+            key_id: "UH9XSQQN27",
+            issuer_id: "Oscar CI key temp",
+            key_content: "-----BEGIN\ PRIVATE\ KEY-----\\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQg+EV6bkLuwOhBgiXC\\nMoK3o+oH0S+ujdkNu813UhjInvOgCgYIKoZIzj0DAQehRANCAAS1S01O1PUNg9Wb\\n66vG8zA1xeXh4RlA7yOzUMLGelirNzlpIlQePfhKwlRyuGp9JhceeM1tCQKZl5Dt\\nnH8+zMwx\\n-----END\ PRIVATE\ KEY-----",
             in_house: false,
         )
 

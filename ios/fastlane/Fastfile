@@ -25,6 +25,9 @@ platform :ios do
     lane :install_certificate_and_profile do
 
         puts "api_key start"
+        puts ENV["APP_STORE_CONNECT_KEY_ID"]
+        puts ENV["APP_STORE_CONNECT_ISSUER_ID"]
+        puts ENV["APP_STORE_CONNECT_KEY_CONTENT"]
         api_key = app_store_connect_api_key(
             key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
             issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],

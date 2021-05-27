@@ -1,4 +1,4 @@
-git_url("https://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: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@github.com/oscarshaitan/BlissTestMatchRepo")
+git_url("https://github.com/oscarshaitan/BlissTestMatchRepo.git")
 
 storage_mode("git")
 

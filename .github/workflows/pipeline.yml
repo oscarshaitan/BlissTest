@@ -13,22 +13,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-          - name: Install Ruby
-            uses: ruby/setup-ruby@v1
-            with:
-              ruby-version: '2.7'
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
 
-          - name: Install Java
-            uses: actions/setup-java@v1
-            with:
-              java-version: '12.x'
+      - name: Install Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
 
-          - name: Install Flutter
-            uses: subosito/flutter-action@v1
-            with:
-              channel: 'stable'
+      - name: Install Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
 
-          - name: Install iOS Gems
+      - name: Install iOS Gems
               working-directory: ${{ github.workspace }}/ios
               run: bundle install
 

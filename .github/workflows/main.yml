@@ -21,20 +21,31 @@ jobs:
     - run: flutter pub get
     
     #Create and Install Certificates
-    - run: echo ${{ secrets.P12 }}  | base64 --decode > CertificatesDecoded.p12
-    - run: security import CertificatesDecoded.p12 -P ${{ secrets.P12_PASSWORD }}
+   # - run: echo ${{ secrets.P12 }}  | base64 --decode > CertificatesDecoded.p12
+    #- run: security import CertificatesDecoded.p12 -P ${{ secrets.P12_PASSWORD }}
     
-    - run: flutter build ipa
+     #Create and install MobileProvision
+    #- run: echo ${{ secrets.MOBILE_PROVISION }}  | base64 --decode > MobileProvision.mobileprovision
+    #- run: mkdir  -p ~/Library/MobileDevice/Provisioning\ Profiles
+    #- run: cp MobileProvision.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$(grep UUID -A1 -a MobileProvision.mobileprovision | grep -io "[-A-F0-9]\{36\}").mobileprovision
     
-    #Create and install MobileProvision
-    - run: echo ${{ secrets.MOBILE_PROVISION }}  | base64 --decode > MobileProvision.mobileprovision
-    - run: uuid=$(grep UUID -A1 -a MobileProvision.mobileprovision | grep -io "[-A-F0-9]\{36\}")
-    - run: cp MobileProvision.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
+    - uses: sparkfabrik/ios-build-action@v1.1.0
+      with:
+        project-path: ios/Runner.xcodeproj
+        p12-base64: ${{ secrets.P12 }}
+        export-method: ad-hoc
+        certificate-password: ${{ secrets.P12_PASSWORD }}       
+        mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
+        code-signing-identity: 'Apple Distribution: Keamore Limited'
+        team-id: ${{ secrets.TEAM_ID }}
+        output-path: build/ios/archive
+
+    #- run: flutter build ipa
     
-    - run: cd ios
+    #- run: cd ios
     
     #Create IPA
-    - run: xcodebuild -exportArchive -archivePath ../build/ios/archive/Runner.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath ../build/ios/iosrelease.ipa -allowProvisioningUpdates
+   # - run: xcodebuild -exportArchive -archivePath ../build/ios/archive/Runner.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath ../build/ios/iosrelease.ipa -allowProvisioningUpdates
     
     - name: Upload iPA
       uses: actions/upload-artifact@master

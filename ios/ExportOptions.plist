@@ -10,7 +10,20 @@
 <plist version="1.0">
     <dict>
         <key>method</key>
-        <string>ad-hoc</string>
+        <string>development</string>
+        <key>teamID</key>
+        <string>3YHY6MND72</string>
+        <string>development</string>
+        <key>uploadBitcode</key>
+        <true/>
+        <key>compileBitcode</key>
+        <true/>
+        <key>uploadSymbols</key>
+        <true/>
+        <key>signingStyle</key>
+        <string>manual</string>
+        <key>signingCertificate</key>
+        <string>Apple Development: Oscar Tigreros</string>
         <key>provisioningProfiles</key>
         <dict>
             <key>com.otigreros.blissTest2</key>

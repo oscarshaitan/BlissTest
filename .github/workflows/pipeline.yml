@@ -29,28 +29,29 @@ jobs:
           channel: 'stable'
 
       - name: Install iOS Gems
-              working-directory: ${{ github.workspace }}/ios
-              run: bundle install
+        working-directory: ${{ github.workspace }}/ios
+        run: bundle install
 
-                - name: Install iOS Certificate and Profile
-                  working-directory: ${{ github.workspace }}/ios
-                  run: bundle exec fastlane install_certificate_and_profile
-                  env:
-                    APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
-                    APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-                    APP_STORE_CONNECT_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_KEY_CONTENT }}
-                    TEMP_KEYCHAIN_USER: ${{ secrets.TEMP_KEYCHAIN_USER }}
-                    TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
-                    GIT_AUTHORIZATION: ${{ secrets.GIT_AUTHORIZATION }}
-                    MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      - name: Install iOS Certificate and Profile
+        working-directory: ${{ github.workspace }}/ios
+        run: bundle exec fastlane install_certificate_and_profile
+        env:
+          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_KEY_CONTENT }}
+          TEMP_KEYCHAIN_USER: ${{ secrets.TEMP_KEYCHAIN_USER }}
+          TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
+          GIT_AUTHORIZATION: ${{ secrets.GIT_AUTHORIZATION }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
-                - name: Set Xcode version
-                  working-directory: ${{ github.workspace }}/ios
-                  run: bundle exec fastlane set_xcode_version
+      - name: Set Xcode version
+        working-directory: ${{ github.workspace }}/ios
+        run: bundle exec fastlane set_xcode_version
 
-                - name: Build IPA
-                  working-directory: ${{ github.workspace }}
-                  run: flutter build ipa --export-options-plist=$GITHUB_WORKSPACE/ios/exportOptions.plist
+      - name: Build IPA
+        working-directory: ${{ github.workspace }}
+        run: flutter build ipa --export-options-plist=$GITHUB_WORKSPACE/ios/exportOptions.plist
+
   build_android:
     runs-on: ubuntu-latest
     steps:

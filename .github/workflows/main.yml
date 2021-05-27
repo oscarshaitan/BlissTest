@@ -114,3 +114,24 @@ jobs:
         token: ${{secrets.FIREBASE_TOKEN}}
         groups: testers
         file: app-debug.apk
+
+
+        upload_artifacts:
+          runs-on: ubuntu-latest
+          steps:
+            - name: Checkout
+                uses: actions/checkout@v2
+            - name: Install Java
+              uses: actions/setup-java@v1
+              with:
+                java-version: '12.x'
+            - name: Install Firebase CLI
+                uses: w9jds/firebase-action@master
+
+            - name: Distribute iOS Beta App
+                working-directory: ${{ github.workspace }}/ios
+                run: bundle exec fastlane distribute_ios_app
+                env:
+                  FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+                  FIREBASE_APP_ID_IOS: ${{ secrets.FIREBASE_APP_ID_IOS }}
+                  IOS_TESTERS: ${{ secrets.IOS_TESTERS }}

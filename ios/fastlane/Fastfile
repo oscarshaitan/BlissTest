@@ -53,13 +53,12 @@ platform :ios do
     end
 
     lane :distribute_ios_app do
-
         firebase_app_distribution(
             app: ENV["FIREBASE_APP_ID_IOS"],
             testers: ENV["IOS_TESTERS"],
             release_notes: "Test",
             firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-            ipa_path: "build/ios/ipa/bliss_test.ipa"
+            ipa_path: "../build/ios/ipa/bliss_test.ipa"
         )
 
     end

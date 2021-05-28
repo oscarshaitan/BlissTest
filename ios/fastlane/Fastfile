@@ -59,7 +59,7 @@ platform :ios do
             testers: ENV["IOS_TESTERS"],
             release_notes: "Test",
             firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-            ipa_path: "../build/ios/ipa/*.ipa"
+            ipa_path: "build/ios/ipa/*.ipa"
         )
 
     end

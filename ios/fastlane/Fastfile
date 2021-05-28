@@ -48,7 +48,7 @@ platform :ios do
 
     lane :set_xcode_version do
 
-        xcversion(version: "12.5")
+        xcversion(version: "{xcode_version}")
 
     end
 

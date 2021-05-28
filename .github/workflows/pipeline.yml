@@ -45,7 +45,6 @@ jobs:
           GIT_AUTHORIZATION: ${{ secrets.GIT_AUTHORIZATION }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
-
       - name: Set Xcode version
         working-directory: ${{ github.workspace }}/ios
         run: bundle exec fastlane set_xcode_version

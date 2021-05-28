@@ -27,7 +27,7 @@
         <key>provisioningProfiles</key>
         <dict>
             <key>com.otigreros.blissTest2</key>
-            <string>Bliss Test</string>
+            <string>match Development com.otigreros.blissTest2</string>
         </dict>
     </dict>
 </plist>

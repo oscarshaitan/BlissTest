@@ -53,6 +53,10 @@ jobs:
         working-directory: ${{ github.workspace }}
         run: flutter build ipa --export-options-plist=$GITHUB_WORKSPACE/ios/exportOptions.plist
 
+
+      run: cd build/ios/ipa
+      run: ls *.ipa
+
       - name: Distribute iOS Beta App
         working-directory: ${{ github.workspace }}/ios
         run: bundle exec fastlane distribute_ios_app

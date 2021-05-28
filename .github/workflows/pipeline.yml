@@ -36,8 +36,8 @@ jobs:
       - name: Install iOS Certificate and Profile
         working-directory: ${{ github.workspace }}/ios
 
-          run: xcode --version
-        run: bundle exec fastlane install_certificate_and_profile
+        run: xcode --version
+        //run: bundle exec fastlane install_certificate_and_profile
         env:
           APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}

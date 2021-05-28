@@ -15,7 +15,7 @@
 	<key>signingStyle</key>
 	<string>manual</string>
 	<key>signingCertificate</key>
-	<string>Apple Development: Oscar Tigreros</string>
+	<string>Apple Development: Created via API</string>
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>com.otigreros.blissTest2</key>
